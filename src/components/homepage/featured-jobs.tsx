@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,28 +9,28 @@ const jobs = [
   {
     title: 'Marketing Manager',
     company: 'Starlight Resorts',
-    location: 'Maldives',
+    location: '',
     type: 'Full-time',
     tags: ['Marketing', 'Luxury', 'Hospitality'],
   },
   {
     title: 'Web Developer',
     company: 'WonderlightAdventure',
-    location: 'Remote',
+    location: '',
     type: 'Full-time',
     tags: ['React', 'Next.js', 'Tailwind CSS'],
   },
   {
     title: 'AI Prompt Engineer',
     company: 'Visionary AI',
-    location: 'San Francisco, CA',
+    location: '',
     type: 'Contract',
     tags: ['AI', 'GenAI', 'NLP'],
   },
   {
     title: 'Tour Guide',
     company: 'Explore More',
-    location: 'Global',
+    location: '',
     type: 'Part-time',
     tags: ['Travel', 'Adventure', 'Customer Service'],
   },
@@ -59,7 +60,7 @@ export function FeaturedJobs() {
                     </CardDescription>
                   </div>
                   <div className="flex flex-col items-end gap-1 text-sm text-foreground/60">
-                    <span className="flex items-center gap-1.5"><MapPin size={14} /> {job.location}</span>
+                    {job.location && <span className="flex items-center gap-1.5"><MapPin size={14} /> {job.location}</span>}
                     <span className="flex items-center gap-1.5"><Clock size={14} /> {job.type}</span>
                   </div>
                 </div>

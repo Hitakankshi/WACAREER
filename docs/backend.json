@@ -1,20 +1,199 @@
-
 {
   "entities": {
-    "User": {
+    "JobPosting": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "User",
+      "title": "JobPosting",
       "type": "object",
-      "description": "Represents a user account within the Royal Ascent Careers platform.",
+      "description": "Represents a job posting on the platform.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the user account."
+          "description": "Unique identifier for the job posting."
         },
-        "email": {
+        "title": {
           "type": "string",
-          "description": "Email address of the user.",
-          "format": "email"
+          "description": "Title of the job posting."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the job posting."
+        },
+        "company": {
+          "type": "string",
+          "description": "Name of the company offering the job."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the job (e.g., city, state)."
+        },
+        "salary": {
+          "type": "number",
+          "description": "Salary offered for the job."
+        },
+        "postedDate": {
+          "type": "string",
+          "description": "Date when the job posting was created.",
+          "format": "date-time"
+        },
+        "applicationDeadline": {
+          "type": "string",
+          "description": "Date by which applications must be submitted.",
+          "format": "date-time"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the job (e.g., engineering, marketing)."
+        },
+        "requirements": {
+          "type": "string",
+          "description": "Requirements (e.g., skills, experience) needed for the job."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "company",
+        "location",
+        "postedDate",
+        "applicationDeadline",
+        "category",
+        "requirements"
+      ]
+    },
+    "Internship": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Internship",
+      "type": "object",
+      "description": "Represents an internship opportunity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the internship."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the internship."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the internship."
+        },
+        "company": {
+          "type": "string",
+          "description": "Name of the company offering the internship."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the internship."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date of the internship.",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date of the internship.",
+          "format": "date-time"
+        },
+        "applicationDeadline": {
+          "type": "string",
+          "description": "Date by which applications must be submitted.",
+          "format": "date-time"
+        },
+        "stipend": {
+          "type": "number",
+          "description": "Stipend amount for the internship."
+        },
+        "requirements": {
+          "type": "string",
+          "description": "Requirements (e.g., skills, education) needed for the internship."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "company",
+        "location",
+        "startDate",
+        "endDate",
+        "applicationDeadline",
+        "requirements"
+      ]
+    },
+    "Course": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Course",
+      "type": "object",
+      "description": "Represents an online course offered on the platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the course."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the course."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the course content."
+        },
+        "instructor": {
+          "type": "string",
+          "description": "Name of the course instructor."
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the course."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Duration of the course (e.g., 4 weeks, 20 hours)."
+        },
+        "syllabus": {
+          "type": "string",
+          "description": "Detailed syllabus of the course content."
+        },
+        "previewVideoUrl": {
+          "type": "string",
+          "description": "URL of the course preview video.",
+          "format": "uri"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the course (e.g., Web Development, AI)."
+        },
+        "downloadableMaterials": {
+          "type": "array",
+          "description": "List of URLs for downloadable materials.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "instructor",
+        "price",
+        "duration",
+        "syllabus",
+        "category"
+      ]
+    },
+    "UserProfile": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserProfile",
+      "type": "object",
+      "description": "Represents a user profile on the platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user profile."
         },
         "firstName": {
           "type": "string",
@@ -24,110 +203,177 @@
           "type": "string",
           "description": "Last name of the user."
         },
-        "signUpDate": {
+        "email": {
           "type": "string",
-          "description": "Date and time the user signed up.",
-          "format": "date-time"
+          "description": "Email address of the user.",
+          "format": "email"
         },
-        "lastLogin": {
+        "phoneNumber": {
           "type": "string",
-          "description": "Date and time of the user's last login.",
-          "format": "date-time"
+          "description": "Phone number of the user."
+        },
+        "resumeUrl": {
+          "type": "string",
+          "description": "URL of the user's resume.",
+          "format": "uri"
         },
         "profilePictureUrl": {
           "type": "string",
           "description": "URL of the user's profile picture.",
           "format": "uri"
         },
-        "googleId": {
-          "type": "string",
-          "description": "Google ID of the user, used for Google authentication. Can be null if the user did not sign up with Google."
-        },
-        "facebookId": {
-          "type": "string",
-          "description": "Facebook ID of the user, used for Facebook authentication. Can be null if the user did not sign up with Facebook."
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number of the user, used for phone number OTP authentication. Can be null if the user did not sign up with phone number."
+        "purchasedCourseIds": {
+          "type": "array",
+          "description": "References to Courses purchased by the user. (Relationship: User N:N Course)",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "id",
+        "firstName",
+        "lastName",
         "email"
+      ]
+    },
+    "Employee": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Employee",
+      "type": "object",
+      "description": "Represents an employee of the company.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the employee."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the employee."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the employee."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the employee.",
+          "format": "email"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the employee."
+        },
+        "department": {
+          "type": "string",
+          "description": "Department the employee belongs to."
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Job title of the employee."
+        },
+        "salary": {
+          "type": "number",
+          "description": "Salary of the employee."
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of tasks assigned to the employee.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "department",
+        "jobTitle",
+        "salary"
+      ]
+    },
+    "Application": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Application",
+      "type": "object",
+      "description": "Represents an application for a job or internship.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the application."
+        },
+        "userProfileId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N Application)"
+        },
+        "jobPostingId": {
+          "type": "string",
+          "description": "Reference to JobPosting. (Relationship: JobPosting 1:N Application). Null if applying to an Internship"
+        },
+        "internshipId": {
+          "type": "string",
+          "description": "Reference to Internship. (Relationship: Internship 1:N Application). Null if applying to a JobPosting"
+        },
+        "applicationDate": {
+          "type": "string",
+          "description": "Date when the application was submitted.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the application (e.g., pending, reviewed, accepted, rejected)."
+        },
+        "coverLetter": {
+          "type": "string",
+          "description": "Cover letter submitted with the application."
+        }
+      },
+      "required": [
+        "id",
+        "userProfileId",
+        "applicationDate",
+        "status"
       ]
     }
   },
   "auth": {
     "providers": [
       "password",
-      "anonymous",
-      "google.com",
-      "facebook.com"
+      "anonymous"
     ]
   },
   "firestore": {
     "structure": [
       {
-        "path": "/users/{userId}",
+        "path": "/jobPostings/{jobPostingId}",
         "definition": {
-          "entityName": "User",
+          "entityName": "JobPosting",
           "schema": {
-            "$ref": "#/backend/entities/User"
+            "$ref": "#/backend/entities/JobPosting"
           },
-          "description": "Stores user profile information. Uses path-based ownership for private user data.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "The unique identifier of the user."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/roles_admin/{userId}",
-        "definition": {
-          "entityName": "role_admin",
-          "schema": {
-            "$ref": "#/backend/entities/User"
-          },
-          "description": "Indicates admin status.  Document existence grants admin privileges.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "The unique identifier of the user."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/job_postings/{jobPostingId}",
-        "definition": {
-          "entityName": "job_posting",
-          "schema": {
-            "$ref": "#/backend/entities/User"
-          },
-          "description": "Stores job postings available on the platform.",
+          "description": "Stores job posting data. Open to the public for listing, but only admins can create, update, or delete. The {jobPostingId} is the unique ID of the job posting.",
           "params": [
             {
               "name": "jobPostingId",
-              "description": "The unique identifier for the job posting."
+              "description": "The unique ID of the job posting."
             }
           ]
         }
       },
       {
-        "path": "/internship_opportunities/{internshipId}",
+        "path": "/internships/{internshipId}",
         "definition": {
-          "entityName": "internship_opportunity",
+          "entityName": "Internship",
           "schema": {
-            "$ref": "#/backend/entities/User"
+            "$ref": "#/backend/entities/Internship"
           },
-          "description": "Stores internship opportunities available on the platform.",
+          "description": "Stores internship data. Open to the public for listing, but only admins can create, update, or delete. The {internshipId} is the unique ID of the internship.",
           "params": [
             {
               "name": "internshipId",
-              "description": "The unique identifier for the internship opportunity."
+              "description": "The unique ID of the internship."
             }
           ]
         }
@@ -135,35 +381,31 @@
       {
         "path": "/courses/{courseId}",
         "definition": {
-          "entityName": "course",
+          "entityName": "Course",
           "schema": {
-            "$ref": "#/backend/entities/User"
+            "$ref": "#/backend/entities/Course"
           },
-          "description": "Stores course information. Includes a 'members' map for managing enrolled students (denormalized for authorization independence).",
+          "description": "Stores course data. Open to the public for listing, but only admins can create, update, or delete. The {courseId} is the unique ID of the course.",
           "params": [
             {
               "name": "courseId",
-              "description": "The unique identifier for the course."
+              "description": "The unique ID of the course."
             }
           ]
         }
       },
       {
-        "path": "/courses/{courseId}/students/{userId}",
+        "path": "/users/{userId}",
         "definition": {
-          "entityName": "student",
+          "entityName": "UserProfile",
           "schema": {
-            "$ref": "#/backend/entities/User"
+            "$ref": "#/backend/entities/UserProfile"
           },
-          "description": "List the course students",
+          "description": "Stores user profile data. Only the user can read/write their own profile. The {userId} corresponds to the Firebase Auth UID.",
           "params": [
             {
-              "name": "courseId",
-              "description": "The unique identifier for the course."
-            },
-            {
               "name": "userId",
-              "description": "The unique identifier of the user."
+              "description": "The Firebase Auth UID of the user."
             }
           ]
         }
@@ -171,24 +413,76 @@
       {
         "path": "/users/{userId}/applications/{applicationId}",
         "definition": {
-          "entityName": "application",
+          "entityName": "Application",
           "schema": {
-            "$ref": "#/backend/entities/User"
+            "$ref": "#/backend/entities/Application"
           },
-          "description": "Stores job/internship applications submitted by users. Includes denormalized user data (e.g., name, email) for easier processing and security rules.",
+          "description": "Stores applications submitted by a user.  Only the user can read/write their own applications. The {userId} corresponds to the Firebase Auth UID, and the {applicationId} is the unique ID of the application.",
           "params": [
             {
               "name": "userId",
-              "description": "The unique identifier of the user."
+              "description": "The Firebase Auth UID of the user."
             },
             {
               "name": "applicationId",
-              "description": "The unique identifier for the application."
+              "description": "The unique ID of the application."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/purchasedCourses/{courseId}",
+        "definition": {
+          "entityName": "Course",
+          "schema": {
+            "$ref": "#/backend/entities/Course"
+          },
+          "description": "Stores references to courses purchased by a user. Only the user can read their purchased courses. The {userId} corresponds to the Firebase Auth UID, and the {courseId} is the unique ID of the course.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The Firebase Auth UID of the user."
+            },
+            {
+              "name": "courseId",
+              "description": "The unique ID of the course."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/employees/{employeeId}",
+        "definition": {
+          "entityName": "Employee",
+          "schema": {
+            "$ref": "#/backend/entities/Employee"
+          },
+          "description": "Stores employee data. Only admins can create, read, update, or delete. The {employeeId} is the unique ID of the employee.",
+          "params": [
+            {
+              "name": "employeeId",
+              "description": "The unique ID of the employee."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roles_admin/{userId}",
+        "definition": {
+          "entityName": "adminRole",
+          "schema": {
+            "$ref": "#/backend/entities/UserProfile"
+          },
+          "description": "Documents in this collection grant admin privileges to the corresponding user ID. Existence of a document confers admin rights. The {userId} corresponds to the Firebase Auth UID.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The Firebase Auth UID of the user."
             }
           ]
         }
       }
     ],
-    "reasoning": "This Firestore structure is designed to support Royal Ascent Careers' job postings, online courses, and user management features while adhering to strict security and scalability principles.  Authorization Independence is achieved through denormalization. For example, access to courses is managed via a members map on the course document itself, eliminating the need for `get()` calls to user profiles in security rules. This allows atomic operations and simplifies security rules. QAPs (Rules Are Not Filters) are supported through structural segregation. Public job postings reside in a separate collection from user-specific data, ensuring secure `list` operations. Path-based ownership (`/users/{userId}/...`) is used extensively to clearly define ownership and access control for private user data.\n\nThe structure leverages consistent patterns for authorization, primarily using Path-Based ownership for user-specific data and Membership Maps for collaborative or shared data.  Global roles are managed via document existence in dedicated collections (e.g., `/roles_admin/{uid}`).\n\nThe design also incorporates explicit state modeling using a `status` field where appropriate and adheres to strict naming conventions for clarity and maintainability. Finally, the structure is designed to support denormalization strategies, such as copying relevant user information to job applications to reduce the need for complex `get()` calls during security rule evaluation."
+    "reasoning": "The Firestore data structure is designed to support a luxury job and course platform while adhering to the principles of Authorization Independence, Structural Segregation, and Access Modeling. User profiles and related data are organized under `/users/{userId}` for private data. Job postings, internships, and courses are stored in separate root-level collections (`/jobPostings`, `/internships`, `/courses`) to facilitate easy querying and listing. Applications are stored as subcollections of user profiles (`/users/{userId}/applications/{applicationId}`) to maintain clear ownership. Purchased courses are modeled as a subcollection of the user profiles (`/users/{userId}/purchasedCourses/{courseId}`).\n\nAuthorization Independence is achieved by denormalizing relevant authorization data (e.g., user IDs, roles) into the documents where access control is required. For instance, while the platform does not implement any collaborative features needing this strategy, if it were to be extended to include collaborative course creation or job posting management, relevant membership roles would be denormalized into course or job posting documents.\n\nQAPs (Rules are not Filters) is supported by structuring the data to allow secure `list` operations. Segregating job postings, internships, and courses into their own collections ensures that rules can be applied at the collection level without needing to filter based on document content. Path-based ownership for user-related data and membership maps (if needed in future collaborative features) enable secure listing of user-owned or shared resources."
   }
 }

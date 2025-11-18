@@ -1,3 +1,4 @@
+
 /**
  * @file Firestore Security Rules for Royal Ascent Careers Platform
  * @description This ruleset enforces a strict user-ownership model for personal data while allowing public read access to job postings and courses.
@@ -73,11 +74,11 @@ service cloud.firestore {
      * @principle Enforces document ownership for writes and restricts access to a user's own data tree.
      */
     match /users/{userId} {
-      allow get: if isOwner(userId);
-      allow list: if false; // User listing is not permitted.
-      allow create: if isOwner(userId) && request.resource.data.id == userId;
-      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
-      allow delete: if isExistingOwner(userId);
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId);
+      allow delete: if isOwner(userId) || isAdmin();
     }
 
      /**
@@ -152,11 +153,7 @@ service cloud.firestore {
      * @principle Enforces document ownership for writes and restricts access to a user's own data tree.
      */
     match /users/{userId}/applications/{applicationId} {
-      allow get: if isOwner(userId);
-      allow list: if isOwner(userId);
-      allow create: if isOwner(userId);
-      allow update: if isExistingOwner(userId);
-      allow delete: if isExistingOwner(userId);
+      allow read, list, create, update, delete: if isOwner(userId);
     }
   }
 }

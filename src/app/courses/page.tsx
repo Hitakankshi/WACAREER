@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -88,7 +90,7 @@ export default function CoursesPage() {
               </CardContent>
               <CardFooter>
                 <Button asChild className="w-full">
-                  <Link href={`/courses/${course.title.toLowerCase().replace(/ /g, '-')}`}>Learn More</Link>
+                  <Link href="/apply">Apply</Link>
                 </Button>
               </CardFooter>
             </Card>

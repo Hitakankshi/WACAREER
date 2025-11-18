@@ -43,6 +43,14 @@ export default function LoginPage() {
   });
 
   async function onSubmit(data: FormData) {
+    if (!auth) {
+        toast({
+            variant: 'destructive',
+            title: 'Sign In Failed',
+            description: 'Authentication service is not available. Please try again later.',
+        });
+        return;
+    }
     try {
       const { redirectPath } = await signInWithEmail(auth, data.email, data.password);
       toast({
@@ -60,6 +68,7 @@ export default function LoginPage() {
   }
 
   const handleGoogleSignIn = async () => {
+    if (!auth) return;
     try {
       const { redirectPath } = await signInWithGoogle(auth);
       toast({
@@ -77,6 +86,7 @@ export default function LoginPage() {
   };
 
   const handleFacebookSignIn = async () => {
+    if (!auth) return;
     try {
       const { redirectPath } = await signInWithFacebook(auth);
       toast({

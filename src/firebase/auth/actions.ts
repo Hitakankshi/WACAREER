@@ -36,30 +36,32 @@ async function createUserDocument(user: any, additionalData: any = {}) {
   // Check if the user document already exists
   const userDoc = await getDoc(userRef);
 
-  const { displayName, email, photoURL } = user;
+  const { email, photoURL } = user;
+  const displayName = additionalData.firstName && additionalData.lastName ? `${additionalData.firstName} ${additionalData.lastName}`.trim() : user.displayName;
+
   const userData = {
     id: user.uid,
-    displayName: displayName || `${additionalData.firstName || ''} ${additionalData.lastName || ''}`.trim(),
-    email,
-    photoURL,
     firstName: additionalData.firstName || '',
     lastName: additionalData.lastName || '',
-    lastLogin: new Date().toISOString(),
+    email,
+    profilePictureUrl: photoURL,
+    purchasedCourseIds: [],
     // Only set signUpDate if the document doesn't exist
     ...(!userDoc.exists() && { signUpDate: new Date().toISOString() })
   };
 
   // Use setDoc with merge to create or update the user document
   await setDoc(userRef, userData, { merge: true });
+
+  if (displayName && user.displayName !== displayName) {
+    await updateProfile(user, { displayName });
+  }
 }
 
 // Sign up with email and password
 export async function signUpWithEmail(auth: Auth, email: string, password: string, additionalData: { firstName: string, lastName: string }) {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const { user } = userCredential;
-  await updateProfile(user, {
-    displayName: `${additionalData.firstName} ${additionalData.lastName}`.trim(),
-  });
   await createUserDocument(user, additionalData);
   const redirectPath = await getRedirectPath(user);
   return { userCredential, redirectPath };

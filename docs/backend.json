@@ -1,0 +1,195 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user account within the Royal Ascent Careers platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user account."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user."
+        },
+        "signUpDate": {
+          "type": "string",
+          "description": "Date and time the user signed up.",
+          "format": "date-time"
+        },
+        "lastLogin": {
+          "type": "string",
+          "description": "Date and time of the user's last login.",
+          "format": "date-time"
+        },
+        "profilePictureUrl": {
+          "type": "string",
+          "description": "URL of the user's profile picture.",
+          "format": "uri"
+        },
+        "googleId": {
+          "type": "string",
+          "description": "Google ID of the user, used for Google authentication. Can be null if the user did not sign up with Google."
+        },
+        "facebookId": {
+          "type": "string",
+          "description": "Facebook ID of the user, used for Facebook authentication. Can be null if the user did not sign up with Facebook."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user, used for phone number OTP authentication. Can be null if the user did not sign up with phone number."
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "signUpDate",
+        "lastLogin"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profile information. Uses path-based ownership for private user data.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roles_admin/{userId}",
+        "definition": {
+          "entityName": "role_admin",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Indicates admin status.  Document existence grants admin privileges.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/job_postings/{jobPostingId}",
+        "definition": {
+          "entityName": "job_posting",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores job postings available on the platform.",
+          "params": [
+            {
+              "name": "jobPostingId",
+              "description": "The unique identifier for the job posting."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/internship_opportunities/{internshipId}",
+        "definition": {
+          "entityName": "internship_opportunity",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores internship opportunities available on the platform.",
+          "params": [
+            {
+              "name": "internshipId",
+              "description": "The unique identifier for the internship opportunity."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}",
+        "definition": {
+          "entityName": "course",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores course information. Includes a 'members' map for managing enrolled students (denormalized for authorization independence).",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique identifier for the course."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}/students/{userId}",
+        "definition": {
+          "entityName": "student",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "List the course students",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique identifier for the course."
+            },
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/applications/{applicationId}",
+        "definition": {
+          "entityName": "application",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores job/internship applications submitted by users. Includes denormalized user data (e.g., name, email) for easier processing and security rules.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            },
+            {
+              "name": "applicationId",
+              "description": "The unique identifier for the application."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure is designed to support Royal Ascent Careers' job postings, online courses, and user management features while adhering to strict security and scalability principles.  Authorization Independence is achieved through denormalization. For example, access to courses is managed via a members map on the course document itself, eliminating the need for `get()` calls to user profiles in security rules. This allows atomic operations and simplifies security rules. QAPs (Rules Are Not Filters) are supported through structural segregation. Public job postings reside in a separate collection from user-specific data, ensuring secure `list` operations. Path-based ownership (`/users/{userId}/...`) is used extensively to clearly define ownership and access control for private user data.\n\nThe structure leverages consistent patterns for authorization, primarily using Path-Based ownership for user-specific data and Membership Maps for collaborative or shared data.  Global roles are managed via document existence in dedicated collections (e.g., `/roles_admin/{uid}`).\n\nThe design also incorporates explicit state modeling using a `status` field where appropriate and adheres to strict naming conventions for clarity and maintainability. Finally, the structure is designed to support denormalization strategies, such as copying relevant user information to job applications to reduce the need for complex `get()` calls during security rule evaluation."
+  }
+}

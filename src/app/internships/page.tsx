@@ -51,7 +51,7 @@ export default function InternshipsPage() {
                   </CardDescription>
                 </div>
                 <div className="flex flex-col items-end gap-1 text-sm text-foreground/60">
-                  <span className="flex items-center gap-1.5"><MapPin size={14} /> {internship.location}</span>
+                  {internship.location && <span className="flex items-center gap-1.5"><MapPin size={14} /> {internship.location}</span>}
                   <span className="flex items-center gap-1.5"><Clock size={14} /> {internship.duration}</span>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Briefcase, Clock } from 'lucide-react';
+import TextType from '@/components/ui/text-type';
 
 const jobs = [
   {
@@ -41,7 +42,14 @@ export function FeaturedJobs() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Latest Job Posts</h2>
+          <TextType
+            as="h2"
+            text="Latest Job Posts"
+            className="font-headline text-3xl font-bold text-primary md:text-4xl"
+            typingSpeed={70}
+            loop={false}
+            startOnVisible={true}
+          />
           <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
             Handpicked opportunities for the discerning professional.
           </p>

@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { MapPin, Briefcase, Clock, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import TextType from '@/components/ui/text-type';
 
 const jobs = [
   {
@@ -70,7 +71,13 @@ export default function JobsPage() {
   return (
     <div className="container mx-auto max-w-7xl py-16 md:py-24">
       <div className="space-y-4 text-center">
-        <h1 className="font-headline text-4xl font-bold text-primary">Find Your Dream Job</h1>
+        <TextType
+            as="h1"
+            text="Find Your Dream Job"
+            className="font-headline text-4xl font-bold text-primary"
+            typingSpeed={70}
+            loop={false}
+          />
         <p className="text-foreground/80 max-w-2xl mx-auto">
           Browse our curated list of exclusive career opportunities.
         </p>

@@ -1,5 +1,7 @@
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Briefcase, GraduationCap, Users, Target } from 'lucide-react';
+import TextType from '@/components/ui/text-type';
 
 const services = [
   {
@@ -29,7 +31,14 @@ export function Services() {
     <section className="py-16 md:py-24 bg-card">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Our Services</h2>
+          <TextType
+            as="h2"
+            text="Our Services"
+            className="font-headline text-3xl font-bold text-primary md:text-4xl"
+            typingSpeed={70}
+            loop={false}
+            startOnVisible={true}
+           />
           <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
             Providing a comprehensive suite of services to elevate careers and organizations.
           </p>

@@ -2,6 +2,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { ApplicationForm } from './application-form';
+import TextType from '@/components/ui/text-type';
 
 export default function ApplyPage() {
   const searchParams = useSearchParams();
@@ -26,7 +27,13 @@ export default function ApplyPage() {
   return (
     <div className="container mx-auto max-w-4xl py-16 md:py-24">
       <div className="space-y-4 text-center">
-        <h1 className="font-headline text-4xl font-bold text-primary">{title}</h1>
+        <TextType
+          as="h1"
+          text={title}
+          className="font-headline text-4xl font-bold text-primary"
+          typingSpeed={70}
+          loop={false}
+        />
         <p className="text-foreground/80">
           {description}
         </p>

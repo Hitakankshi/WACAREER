@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Clock, BarChart, Star } from 'lucide-react';
+import TextType from '@/components/ui/text-type';
 
 const courses = [
   {
@@ -52,7 +53,13 @@ export default function CoursesPage() {
   return (
     <div className="container mx-auto max-w-7xl py-16 md:py-24">
       <div className="space-y-4 text-center">
-        <h1 className="font-headline text-4xl font-bold text-primary">Explore Our Courses</h1>
+        <TextType
+          as="h1"
+          text="Explore Our Courses"
+          className="font-headline text-4xl font-bold text-primary"
+          typingSpeed={70}
+          loop={false}
+        />
         <p className="text-foreground/80 max-w-2xl mx-auto">
           Invest in yourself with our premium selection of courses designed for career acceleration.
         </p>

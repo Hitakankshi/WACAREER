@@ -11,7 +11,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetFooter,
   SheetTrigger,
   SheetDescription,
 } from '@/components/ui/sheet';
@@ -153,22 +152,20 @@ export default function Header() {
                     )}
                   </div>
               </div>
-              <SheetFooter>
-                <div className="flex flex-col gap-2 w-full">
-                  {user ? (
-                      <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }}>Sign Out</Button>
-                  ) : (
-                      <>
-                          <Button variant="outline" asChild>
-                          <Link href="/login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
-                          </Button>
-                          <Button asChild>
-                          <Link href="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
-                          </Button>
-                      </>
-                  )}
-                </div>
-              </SheetFooter>
+              <div className="mt-auto flex flex-col gap-2">
+                {user ? (
+                    <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }}>Sign Out</Button>
+                ) : (
+                    <>
+                        <Button variant="outline" asChild>
+                        <Link href="/login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+                        </Button>
+                        <Button asChild>
+                        <Link href="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
+                        </Button>
+                    </>
+                )}
+              </div>
             </SheetContent>
           </Sheet>
         </div>

@@ -9,9 +9,10 @@ import { Button } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
-  SheetTrigger,
+  SheetHeader,
   SheetTitle,
-  SheetDescription,
+  SheetFooter,
+  SheetTrigger,
 } from '@/components/ui/sheet';
 import { useUser, useAuth } from '@/firebase';
 import { signOut } from '@/firebase/auth/actions';
@@ -124,47 +125,47 @@ export default function Header() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <SheetDescription className="sr-only">
-                Mobile navigation menu
-              </SheetDescription>
-              <div className="p-4">
-                <div className="mb-8">
-                  <Logo className="h-8 w-auto" />
-                </div>
-                <div className="flex flex-col gap-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="text-lg font-medium hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] flex flex-col">
+              <SheetHeader>
+                <SheetTitle>
+                    <Logo className="h-8 w-auto" />
+                </SheetTitle>
+              </SheetHeader>
+              <div className="flex-grow flex flex-col justify-between py-4">
+                  <div className="flex flex-col gap-4">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-lg font-medium hover:text-primary"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
                     {user && (
-                    <>
-                      <Link href="/student/dashboard" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary">Student Dashboard</Link>
-                      <Link href="/employer/dashboard" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary">Employer Dashboard</Link>
-                    </>
-                  )}
-                  <div className="mt-6 flex flex-col gap-2">
-                     {user ? (
-                        <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }}>Sign Out</Button>
-                     ) : (
-                        <>
-                            <Button variant="outline" asChild>
-                            <Link href="/login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
-                            </Button>
-                            <Button asChild>
-                            <Link href="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
-                            </Button>
-                        </>
-                     )}
+                      <>
+                        <Link href="/student/dashboard" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary">Student Dashboard</Link>
+                        <Link href="/employer/dashboard" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary">Employer Dashboard</Link>
+                      </>
+                    )}
                   </div>
-                </div>
+                  <SheetFooter>
+                    <div className="flex flex-col gap-2 w-full">
+                      {user ? (
+                          <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }}>Sign Out</Button>
+                      ) : (
+                          <>
+                              <Button variant="outline" asChild>
+                              <Link href="/login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+                              </Button>
+                              <Button asChild>
+                              <Link href="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
+                              </Button>
+                          </>
+                      )}
+                    </div>
+                  </SheetFooter>
               </div>
             </SheetContent>
           </Sheet>

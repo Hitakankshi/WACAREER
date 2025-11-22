@@ -28,8 +28,8 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import Image from 'next/image';
-import { useAuth, useDatabase, useUser } from '@/firebase';
-import { ref, push, set } from 'firebase/database';
+import { useFirestore, useUser } from '@/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 const baseSchema = z.object({
@@ -52,7 +52,7 @@ export function ApplicationForm({ type }: ApplicationFormProps) {
   const { toast } = useToast();
   const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
   const { user } = useUser();
-  const database = useDatabase();
+  const firestore = useFirestore();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -72,7 +72,7 @@ export function ApplicationForm({ type }: ApplicationFormProps) {
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    if (!user || !database) {
+    if (!user || !firestore) {
       toast({
         variant: 'destructive',
         title: 'Authentication Error',
@@ -83,8 +83,7 @@ export function ApplicationForm({ type }: ApplicationFormProps) {
     }
     
     try {
-      const applicationsRef = ref(database, 'applications');
-      const newApplicationRef = push(applicationsRef);
+      const applicationsRef = collection(firestore, 'applications');
       
       // We are not handling file uploads for resume yet.
       // This will be implemented in a future step.
@@ -101,7 +100,7 @@ export function ApplicationForm({ type }: ApplicationFormProps) {
         ...(type === 'course' && { courseId: searchParams.get('id') || 'general' }),
       };
 
-      await set(newApplicationRef, applicationData);
+      await addDoc(applicationsRef, applicationData);
 
       if (type === 'course') {
           toast({

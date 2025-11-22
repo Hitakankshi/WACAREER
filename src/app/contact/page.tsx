@@ -18,9 +18,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { MapPin, Mail, Phone } from 'lucide-react';
-import { useFirestore } from '@/firebase';
-import { addDoc, collection } from 'firebase/firestore';
 import TextType from '@/components/ui/text-type';
+import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -33,7 +32,6 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const firestore = useFirestore();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -46,21 +44,20 @@ export default function ContactPage() {
   });
 
   async function onSubmit(data: FormData) {
-    if (!firestore) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Could not connect to the database. Please try again later.',
-      });
-      return;
-    }
-
     try {
-      const messagesRef = collection(firestore, 'contactMessages');
-      await addDoc(messagesRef, {
-        ...data,
-        submittedAt: new Date().toISOString(),
-      });
+      await emailjs.send(
+        'service_h2k3eek',
+        'template_r5fugvy',
+        {
+          from_name: data.name,
+          to_name: 'WonderlightAdventure',
+          from_email: data.email,
+          to_email: 'wonderlightadventurecareer@gmail.com',
+          subject: data.subject,
+          message: data.message,
+        },
+        'vnZk5HotSqbR26E_g'
+      );
 
       toast({
         title: 'Message Sent!',
@@ -68,7 +65,7 @@ export default function ContactPage() {
       });
       form.reset();
     } catch (error) {
-      console.error('Error submitting contact form:', error);
+      console.error('Error sending email:', error);
       toast({
         variant: 'destructive',
         title: 'Submission Failed',

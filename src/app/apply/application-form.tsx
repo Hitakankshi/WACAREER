@@ -83,7 +83,7 @@ export function ApplicationForm({ type }: ApplicationFormProps) {
     }
     
     try {
-      const applicationsRef = collection(firestore, 'applications');
+      const applicationsRef = collection(firestore, `users/${user.uid}/applications`);
       
       // We are not handling file uploads for resume yet.
       // This will be implemented in a future step.

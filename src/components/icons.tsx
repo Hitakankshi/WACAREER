@@ -23,7 +23,7 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
         fill="url(#goldGradient)"
         fontWeight="bold"
       >
-        WLA
+        W.A
       </text>
     </svg>
   );

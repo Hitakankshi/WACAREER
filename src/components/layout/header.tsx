@@ -13,6 +13,7 @@ import {
   SheetTitle,
   SheetFooter,
   SheetTrigger,
+  SheetDescription,
 } from '@/components/ui/sheet';
 import { useUser, useAuth } from '@/firebase';
 import { signOut } from '@/firebase/auth/actions';
@@ -130,8 +131,9 @@ export default function Header() {
                 <SheetTitle>
                     <Logo className="h-8 w-auto" />
                 </SheetTitle>
+                <SheetDescription className="sr-only">A menu of navigation links</SheetDescription>
               </SheetHeader>
-              <div className="flex-grow flex flex-col justify-between py-4">
+              <div className="flex-grow flex flex-col py-4">
                   <div className="flex flex-col gap-4">
                     {navLinks.map((link) => (
                       <Link
@@ -150,23 +152,23 @@ export default function Header() {
                       </>
                     )}
                   </div>
-                  <SheetFooter>
-                    <div className="flex flex-col gap-2 w-full">
-                      {user ? (
-                          <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }}>Sign Out</Button>
-                      ) : (
-                          <>
-                              <Button variant="outline" asChild>
-                              <Link href="/login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
-                              </Button>
-                              <Button asChild>
-                              <Link href="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
-                              </Button>
-                          </>
-                      )}
-                    </div>
-                  </SheetFooter>
               </div>
+              <SheetFooter>
+                <div className="flex flex-col gap-2 w-full">
+                  {user ? (
+                      <Button onClick={() => { handleSignOut(); setIsMenuOpen(false); }}>Sign Out</Button>
+                  ) : (
+                      <>
+                          <Button variant="outline" asChild>
+                          <Link href="/login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+                          </Button>
+                          <Button asChild>
+                          <Link href="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
+                          </Button>
+                      </>
+                  )}
+                </div>
+              </SheetFooter>
             </SheetContent>
           </Sheet>
         </div>

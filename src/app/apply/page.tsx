@@ -2,7 +2,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { ApplicationForm } from './application-form';
-import TextType from '@/components/ui/text-type';
 import React, { Suspense } from 'react';
 
 function ApplyPageContent() {
@@ -27,13 +26,9 @@ function ApplyPageContent() {
   return (
     <>
       <div className="space-y-4 text-center">
-        <TextType
-          as="h1"
-          text={title}
-          className="font-headline text-4xl font-bold text-primary"
-          typingSpeed={70}
-          loop={false}
-        />
+        <h1 className="font-headline text-4xl font-bold text-primary">
+          {title}
+        </h1>
         <p className="text-foreground/80">
           {description}
         </p>

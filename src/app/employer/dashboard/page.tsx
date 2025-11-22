@@ -3,19 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Building, Users, FileText } from 'lucide-react';
 import Link from 'next/link';
-import TextType from '@/components/ui/text-type';
 
 export default function EmployerDashboardPage() {
   return (
     <div className="container mx-auto max-w-7xl py-16 md:py-24">
       <div className="space-y-4 mb-12">
-        <TextType
-          as="h1"
-          text="Employer Dashboard"
-          className="font-headline text-4xl font-bold text-primary"
-          typingSpeed={70}
-          loop={false}
-        />
+        <h1 className="font-headline text-4xl font-bold text-primary">
+          Employer Dashboard
+        </h1>
         <p className="text-foreground/80 max-w-2xl">
           Manage your job postings and connect with top talent.
         </p>

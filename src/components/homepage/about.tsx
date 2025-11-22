@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent } from '@/components/ui/card';
-import TextType from '@/components/ui/text-type';
 
 const aboutImage = PlaceHolderImages.find(p => p.id === 'about-image');
 
@@ -11,14 +10,9 @@ export function About() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto grid grid-cols-1 items-center gap-12 md:grid-cols-2">
         <div className="order-2 md:order-1">
-          <TextType
-            as="h2"
-            text="About WonderlightAdventure"
-            className="font-headline text-3xl font-bold text-primary md:text-4xl"
-            typingSpeed={70}
-            loop={false}
-            startOnVisible={true}
-          />
+          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">
+            About WonderlightAdventure
+          </h2>
           <p className="mt-4 text-foreground/80">
             Founded on the principles of excellence and exclusivity, WonderlightAdventure Careers is the premier destination for ambitious professionals and forward-thinking companies. We bridge the gap between exceptional talent and extraordinary opportunities.
           </p>

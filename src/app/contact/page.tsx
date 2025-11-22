@@ -18,7 +18,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { MapPin, Mail, Phone } from 'lucide-react';
-import TextType from '@/components/ui/text-type';
 import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({
@@ -77,13 +76,9 @@ export default function ContactPage() {
   return (
     <div className="container mx-auto max-w-6xl py-16 md:py-24">
       <div className="space-y-4 text-center mb-12">
-        <TextType
-          as="h1"
-          text="Contact Us"
-          className="font-headline text-4xl font-bold text-primary"
-          typingSpeed={70}
-          loop={false}
-        />
+        <h1 className="font-headline text-4xl font-bold text-primary">
+          Contact Us
+        </h1>
         <p className="text-foreground/80 max-w-2xl mx-auto">
           Have questions or feedback? We&apos;d love to hear from you.
         </p>

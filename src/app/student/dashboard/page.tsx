@@ -9,7 +9,6 @@ import { useUser, useFirestore, useCollection, useMemoFirebase } from '@/firebas
 import { collection, query, orderBy, limit } from 'firebase/firestore';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import TextType from '@/components/ui/text-type';
 
 export default function StudentDashboardPage() {
   const { user, isUserLoading } = useUser();
@@ -46,13 +45,9 @@ export default function StudentDashboardPage() {
   return (
     <div className="container mx-auto max-w-7xl py-16 md:py-24">
       <div className="space-y-4 mb-12">
-        <TextType
-          as="h1"
-          text="Student Dashboard"
-          className="font-headline text-4xl font-bold text-primary"
-          typingSpeed={70}
-          loop={false}
-        />
+        <h1 className="font-headline text-4xl font-bold text-primary">
+          Student Dashboard
+        </h1>
         <p className="text-foreground/80 max-w-2xl">
           Welcome back! Here's an overview of your learning and career journey.
         </p>
